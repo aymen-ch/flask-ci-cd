@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    triggers {
+        pollSCM('* * * * *') 
+    }
     environment {
         GIT_CREDENTIALS_ID = 'github-creds'
     }
