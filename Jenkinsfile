@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build --no-cache -t flask-app .'
+                bat 'docker build --no-cache -t flask-app .'  
             }
         }
 
