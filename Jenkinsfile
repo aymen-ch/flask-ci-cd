@@ -6,7 +6,7 @@ pipeline {
     }
 
     triggers {
-        pollSCM('* * * * *')  // Vérifie les changements toutes les minutes
+        pollSCM('* * * * *')  
     }
     
     stages {
