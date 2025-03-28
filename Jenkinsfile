@@ -5,7 +5,6 @@ pipeline {
         GIT_CREDENTIALS_ID = 'github-creds'
     }
 
-    
     stages {
         stage('Checkout Code') {
             steps {
@@ -23,17 +22,26 @@ pipeline {
 
         stage('Stop and Remove Old Containers') {
             steps {
-                bat 'docker stop flask-app || echo "No running container"'
-                bat 'docker rm flask-app || echo "No container to remove"'
+                bat '''
+                FOR /F "tokens=*" %%i IN ('docker ps -q --filter "name=flask-app"') DO docker stop %%i
+                FOR /F "tokens=*" %%i IN ('docker ps -a -q --filter "name=flask-app"') DO docker rm -f %%i
+                '''
+            }
+        }
+
+        stage('Remove Old Docker Image') {
+            steps {
+                bat '''
+                FOR /F "tokens=*" %%i IN ('docker images -q flask-app') DO docker rmi -f %%i
+                '''
             }
         }
 
         stage('Run with Docker Compose') {
             steps {
-                bat 'docker-compose up -d --force-recreate'
+                bat 'docker-compose up -d --force-recreate --remove-orphans'
             }
         }
-
 
         stage('Test Application') {
             steps {
