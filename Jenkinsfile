@@ -5,9 +5,6 @@ pipeline {
         GIT_CREDENTIALS_ID = 'github-creds'
     }
 
-    triggers {
-        pollSCM('* * * * *')  
-    }
     
     stages {
         stage('Checkout Code') {
