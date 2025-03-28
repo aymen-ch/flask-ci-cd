@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDENTIALS_ID = 'github-creds' // Change selon tes credentials
+        GIT_CREDENTIALS_ID = 'github-creds'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main',credentialsId: GIT_CREDENTIALS_ID	, url: 'https://github.com/aymen-ch/flask-ci-cd.git'
+                git branch: 'main', credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/aymen-ch/flask-ci-cd.git'
             }
         }
 
@@ -18,9 +18,22 @@ pipeline {
             }
         }
 
+        stage('Stop and Remove Old Containers') {
+            steps {
+                bat 'docker stop flask-app || echo "No running container"'
+                bat 'docker rm flask-app || echo "No container to remove"'
+            }
+        }
+
         stage('Run with Docker Compose') {
             steps {
-                bat 'docker-compose up -d'
+                bat 'docker-compose up -d --force-recreate'
+            }
+        }
+
+        stage('Wait for Application to Start') {
+            steps {
+                bat 'timeout /t 10' // Attendre que le conteneur démarre
             }
         }
 
