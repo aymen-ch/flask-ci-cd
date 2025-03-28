@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDENTIALS_ID = 'b5b97bd1-f88d-4e84-84e4-e7db18e00773' // Change selon tes credentials
+        GIT_CREDENTIALS_ID = 'github-creds' // Change selon tes credentials
     }
 
     stages {
