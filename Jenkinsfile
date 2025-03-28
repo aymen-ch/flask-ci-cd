@@ -1,10 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_CREDENTIALS_ID = 'github-creds' // Change selon tes credentials
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/aymen-ch/repo.git'
+                git credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/ton-utilisateur/flask-ci-cd.git'
             }
         }
 
