@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello, CI/CD with Jenkins on Windows! V6"
+    return "This is my new commit to improve my first jenkins pipeline, good job"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
