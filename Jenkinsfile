@@ -11,6 +11,7 @@ pipeline {
             steps {
                 cleanWs()
                 git branch: 'main', credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/aymen-ch/flask-ci-cd.git'
+                bat 'git log -1'
             }
         }
 
