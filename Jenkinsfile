@@ -5,6 +5,10 @@ pipeline {
         GIT_CREDENTIALS_ID = 'github-creds'
     }
 
+    triggers {
+        pollSCM('* * * * *')  // Vérifie les changements toutes les minutes
+    }
+    
     stages {
         stage('Checkout Code') {
             steps {
