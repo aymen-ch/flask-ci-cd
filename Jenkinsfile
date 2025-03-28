@@ -31,11 +31,6 @@ pipeline {
             }
         }
 
-        stage('Wait for Application to Start') {
-            steps {
-                bat 'timeout /t 10' // Attendre que le conteneur démarre
-            }
-        }
 
         stage('Test Application') {
             steps {
