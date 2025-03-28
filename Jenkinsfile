@@ -20,13 +20,13 @@ pipeline {
 
         stage('Run with Docker Compose') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
 
         stage('Test Application') {
             steps {
-                sh 'curl -f http://localhost:5000'
+                bat 'curl -f http://localhost:5000'
             }
         }
     }
